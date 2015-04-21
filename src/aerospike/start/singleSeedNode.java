@@ -1,5 +1,7 @@
 package aerospike.start;
 
+import java.util.Map;
+
 import com.aerospike.client.AerospikeClient;
 import com.aerospike.client.Bin;
 import com.aerospike.client.Key;
@@ -38,7 +40,21 @@ public class singleSeedNode {
 		client.delete(wrpolicy, key);
 	}
 	public static void main(String args[]) {
-	 
+		
+		String server="127.0.0.1";
+		int port=3000;
+		singleSeedNode testObj=new singleSeedNode(server,port);
+		testObj.writeSingleValue("myBin", "myBinVlue","mySet", "myKey");
+		Key key=new Key(testObj.namespace,"mySet","myKey");
+		Record rec=testObj.readAllBins(key);
+		
+		if (rec != null) {
+            System.out.println("Found record: Expiration=" + rec.expiration + " Generation=" + rec.generation);
+            for (Map.Entry<String,Object> entry : rec.bins.entrySet()) {
+                System.out.println("Name=" + entry.getKey() + " Value=" + entry.getValue());
+            }
+        }
+		
 		
 	}
 }
