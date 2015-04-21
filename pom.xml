@@ -37,7 +37,18 @@
 		                <goal>single</goal>
 		            </goals>
 		        </execution>
-		    </executions>
+		         <execution>  
+				     <phase>test</phase>  
+				     <goals>  
+				      <goal>java</goal>  
+				     </goals>  
+				     <configuration>  
+				      <mainClass>aerospike.start.singleSeedNode</mainClass>  
+				      <arguments>  
+				      </arguments>  
+				     </configuration>  
+			     </execution>
+			</executions>
 		</plugin>
     </plugins>
     
