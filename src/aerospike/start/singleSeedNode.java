@@ -12,7 +12,7 @@ public class singleSeedNode {
 	
 	AerospikeClient client;
 	WritePolicy wrpolicy;
-	String namespace=null;
+	String namespace="test";
 	singleSeedNode(String serverAdd,int port) {
 		this.client = new AerospikeClient(serverAdd, port);
 		this.wrpolicy= new WritePolicy();
@@ -20,9 +20,6 @@ public class singleSeedNode {
 	}
 	
 	public void writeSingleValue(String binName,String binValue,String setName,String keyName) {
-		if(namespace.isEmpty()) {
-			namespace="test";
-		}
 		Key key=new Key(namespace,setName,keyName);
 		Bin bin=new Bin(binName,binValue);
 		client.put(wrpolicy, key, bin);
@@ -33,9 +30,6 @@ public class singleSeedNode {
 		return rec;
 	}
 	public void deleteRecord(String setName,String keyName) {
-		if(namespace.isEmpty()) {
-			namespace="test";
-		}
 		Key key = new Key(namespace,setName,keyName);
 		client.delete(wrpolicy, key);
 	}
@@ -49,12 +43,14 @@ public class singleSeedNode {
 		Record rec=testObj.readAllBins(key);
 		
 		if (rec != null) {
-            System.out.println("Found record: Expiration=" + rec.expiration + " Generation=" + rec.generation);
-            for (Map.Entry<String,Object> entry : rec.bins.entrySet()) {
-                System.out.println("Name=" + entry.getKey() + " Value=" + entry.getValue());
-            }
-        }
-		
+           		 System.out.println("Found record: Expiration=" + rec.expiration + " Generation=" + rec.generation);
+           		 for (Map.Entry<String,Object> entry : rec.bins.entrySet()) {
+               			 System.out.println("Name=" + entry.getKey() + " Value=" + entry.getValue());
+           		 }
+
+       	 	 }
+	
+           	 testObj.client.close();
 		
 	}
 }

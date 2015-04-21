@@ -37,7 +37,7 @@
 		                <goal>single</goal>
 		            </goals>
 		        </execution>
-		         <execution>  
+		<!--         <execution>  
 				     <phase>test</phase>  
 				     <goals>  
 				      <goal>java</goal>  
@@ -48,7 +48,7 @@
 				      </arguments>  
 				     </configuration>  
 			     </execution>
-			</executions>
+	-->     	</executions>
 		</plugin>
     </plugins>
     
